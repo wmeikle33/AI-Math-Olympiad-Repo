@@ -19,6 +19,48 @@ def set_env(input_archive, temp_dir):
         'openai_harmony'
     ], check=True)
 
+class AIMO3Template:
+
+    def __init__(self):
+
+        pass
+
+    def get_system_content(self, system_prompt: str, tool_config: ToolNamespaceConfig) -> SystemContent:
+
+        return (
+            SystemContent.new()
+            .with_model_identity(system_prompt)
+            .with_reasoning_effort(reasoning_effort=ReasoningEffort.HIGH)
+            .with_tools(tool_config)
+        )
+
+    def apply_chat_template(
+        self, 
+        system_prompt: str, 
+        user_prompt: str, 
+        tool_config: ToolNamespaceConfig
+    ) -> list[Message]:
+
+        system_content = self.get_system_content(system_prompt, tool_config)        
+        system_message = Message.from_role_and_content(Role.SYSTEM, system_content)
+
+        user_message = Message.from_role_and_content(Role.USER, user_prompt)
+
+        return [system_message, user_message]
+
+    def apply_chat_template_for_chatml(
+        self, 
+        messages,
+        tokenizer
+    ) -> list:
+        return tokenizer.apply_chat_template(
+            messages,
+            tokenize=True,
+            add_generation_prompt=True,
+            enable_thinking=True,
+            tools=CFG.tools,
+        )
+
 class AIMO3Tool:
     """Python code execution tool using Jupyter kernel sandbox."""
 
