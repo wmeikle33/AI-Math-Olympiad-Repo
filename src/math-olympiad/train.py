@@ -1,3 +1,5 @@
+%pip uninstall --yes 'keras' 'matplotlib' 'scikit-learn' 'tensorflow'
+
 import gc
 import re
 import math
