@@ -1,3 +1,24 @@
+def set_env(input_archive, temp_dir):
+
+    if not os.path.exists(temp_dir):
+        os.makedirs(temp_dir, exist_ok=True)
+        
+        subprocess.run(['tar', '-xzf', input_archive, '-C', temp_dir], check=True)
+    
+    subprocess.run([
+        sys.executable, 
+        '-m', 
+        'pip', 
+        'install', 
+        '--no-index', 
+        '--find-links', 
+        f'{temp_dir}/wheels', 
+        'unsloth', 
+        'trl', 
+        'vllm', 
+        'openai_harmony'
+    ], check=True)
+
 class AIMO3Tool:
     """Python code execution tool using Jupyter kernel sandbox."""
 
