@@ -31,6 +31,8 @@ from openai_harmony import (
 from transformers import set_seed, AutoTokenizer
 import kaggle_evaluation.aimo_3_inference_server
 
+set_seed(CFG.seed)
+
 set_env(
     input_archive='/kaggle/input/notebooks/shelterw/aimo-3-vllm-v16/wheels.tar.gz', 
     temp_dir='/kaggle/tmp/setup'
