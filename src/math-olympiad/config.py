@@ -1,3 +1,10 @@
+os.environ['TRANSFORMERS_NO_TF'] = '1'
+os.environ['TRANSFORMERS_NO_FLAX'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+os.environ['TRITON_PTXAS_PATH'] = '/usr/local/cuda/bin/ptxas'
+os.environ['TIKTOKEN_ENCODINGS_BASE'] = '/kaggle/tmp/setup/tiktoken_encodings'
+
 class CFG:
     
     system_prompt = (
