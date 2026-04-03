@@ -14,6 +14,7 @@ from concurrent.futures import as_completed, ThreadPoolExecutor
 import json
 import pandas as pd
 import polars as pl
+from .utils import set_env
 
 from openai import OpenAI
 
